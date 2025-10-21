@@ -14,7 +14,15 @@ preflight:
 
 win:
 	@echo "🎈 Building for Windows... Hope you like .exe files!"
-	GOOS=windows GOARCH=amd64 go build -o $(DIST)/$(BINARY_NAME)-win.exe $(SRC)
+	@if command -v rsrc >/dev/null 2>&1 && [ -f konfetti.png ]; then \
+		echo "🖼️ Embedding konfetti.png as icon using rsrc..."; \
+		rsrc -ico konfetti.png -o rsrc_windows.syso; \
+		GOOS=windows GOARCH=amd64 go build -o $(DIST)/$(BINARY_NAME)-win.exe $(SRC); \
+		rm -f rsrc_windows.syso; \
+	else \
+		echo "⚠️  rsrc not found or konfetti.png missing - building without icon"; \
+		GOOS=windows GOARCH=amd64 go build -o $(DIST)/$(BINARY_NAME)-win.exe $(SRC); \
+	fi
 	@echo "🥳 Windows build complete! Go break the registry!"
 
 linux:
@@ -24,6 +32,7 @@ linux:
 
 osx:
 	@echo "🎈 Building for macOS... For all the fancy folks."
+	@echo "💡 Tip: Convert konfetti.png to .icns for app bundling with iconutil!"
 	GOOS=darwin GOARCH=amd64 go build -o $(DIST)/$(BINARY_NAME)-mac $(SRC)
 	@echo "🍏 macOS build ready! Now go be creative."
 
@@ -34,6 +43,7 @@ linux-arm:
 
 osx-arm:
 	@echo "🦄 Building for macOS ARM (M1/M2)... Apple silicon, meet confetti!"
+	@echo "💡 Tip: Convert konfetti.png to .icns for app bundling with iconutil!"
 	GOOS=darwin GOARCH=arm64 go build -o $(DIST)/$(BINARY_NAME)-mac-arm64 $(SRC)
 	@echo "🚀 macOS ARM build ready! Unleash the unicorns."
 
