@@ -1,0 +1,32 @@
+# Binaries
+konfetti
+konfetti-*
+*.exe
+
+# Go build artifacts
+*.o
+*.a
+*.so
+
+# Testing
+*.test
+*.out
+coverage.txt
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Config (user-specific)
+.konfetti.yaml
+
+# Temporary files
+tmp/
+temp/
