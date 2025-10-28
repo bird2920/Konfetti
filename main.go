@@ -17,7 +17,8 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-const version = "2.0.0"
+// Version can be overridden at build time via -ldflags "-X main.Version=..."
+var Version = "2.0.0"
 
 type ConfigResult struct {
 	File     string                 `json:"file"`
@@ -29,7 +30,7 @@ func main() {
 	app := &cli.App{
 		Name:     "Konfetti 🎉",
 		Usage:    "Wrangle your config chaos with style",
-		Version:  version,
+		Version:  Version,
 		Compiled: time.Now(),
 		Commands: []*cli.Command{
 			{

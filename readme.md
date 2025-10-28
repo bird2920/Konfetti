@@ -86,6 +86,7 @@ File: ./app/settings.json [json]
 * Too noisy? Add `-no-warn`.
 * Want structured scripting? `-output json`.
 * Stdin parse failed? It probably wasn’t valid JSON/YAML/XML; fell back to raw key=value or plain text.
+* Windows Defender flagged the exe? New unsigned Go binaries sometimes trigger generic ML detections (e.g. `Win32/Sabsik.FL.A!ml`). See `AV-SUBMISSION.md` for false positive submission steps or use a signed release when available.
 
 ## Roadmap (short list)
 * Real explain engine
